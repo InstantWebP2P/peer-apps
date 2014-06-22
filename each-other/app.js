@@ -1,0 +1,1 @@
+var running = deskShell.startApp({"user-data-dir": __dirname+"/data"});
