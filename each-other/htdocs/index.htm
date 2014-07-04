@@ -24,11 +24,11 @@
 	        var socket = io('/eachother');
 	        socket.on('connect', function(){
 
-	        	setInterval(function(){
+	        	///setInterval(function(){
 	        		socket.emit('ping', {data: 'hello'}, function(data){
 	        			alert('ping cb ok: '+data.data);
 	        		});
-	        	}, 2000);
+	        	///}, 2000);
 
 	        	socket.on('pong', function(data){
 	        		alert('ping event ok: '+data.data);
