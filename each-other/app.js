@@ -3,7 +3,7 @@ var exec = require('child_process').exec,
 
 var forwardProxy = require('forward-proxy');
 var prxySrv = new forwardProxy({
-	    usrkey: 'unlockzs681021', 
+	    usrkey: 'helloword', 
 		secmode: 'acl', 
 		access_local: false
     }, function(err, proxy){
