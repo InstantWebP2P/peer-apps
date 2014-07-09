@@ -1,7 +1,7 @@
 peer-apps
 =========
 
-Run Network Apps and Services from Peer based on iWebPP.io and Chrome
+Run Network Apps and Services from Peer based on iWebPP.io and Chrome using HTML5/CSS/JS and Node.js
 
 
 
