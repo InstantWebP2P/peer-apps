@@ -25,17 +25,17 @@ function FindProxyForURL(url, host) {
 	
 	// ftp site prefer socks5 proxy
 	if (url.match("ftp:")) {
-		return "DIRECT;SOCKS5 127.0.0.1:51888";
+		return "SOCKS5 127.0.0.1:51888";
 	}
 		
 	// http site prefer socks5 proxy
 	if (url.match("http:")) {
-        return "DIRECT;SOCKS5 127.0.0.1:51888;PROXY 127.0.0.1:51866;";
+        return "SOCKS5 127.0.0.1:51888;PROXY 127.0.0.1:51866;";
 	}
 	
 	// https site prefer http proxy
 	if (url.match("https:")) {
-		return "DIRECT;PROXY 127.0.0.1:51866;SOCKS5 127.0.0.1:51888;";
+		return "PROXY 127.0.0.1:51866;SOCKS5 127.0.0.1:51888;";
 	}
 }
 

@@ -3,7 +3,7 @@ var exec = require('child_process').exec,
 
 var forwardProxy = require('forward-proxy');
 var prxySrv = new forwardProxy({
-	    usrkey: 'unlockzs681021', 
+	    usrkey: 'unlockus', 
 		secmode: 'acl', 
 		access_local: false
     }, function(err, proxy){
@@ -26,13 +26,13 @@ var prxySrv = new forwardProxy({
 		// start http proxy service
 		var http = require('http');
 		var pxySrv = http.createServer();
-		
+
 		pxySrv.on('request', importApp.httpApp.proxy);
 		pxySrv.on('connect', importApp.httpApp.tunnel);
-			
+
 		pxySrv.listen(data.port, 50);
 		console.log('Http forwar proxy server listen on port '+data.port);
-		
+
 		// 3.
 		// start front app
 		var running = deskShell.startApp({
@@ -42,7 +42,7 @@ var prxySrv = new forwardProxy({
 
 		running.then(function(app){
 			console.log('app started ... done');
-										
+
 			// each-other namespace
 			app.socketio.of('/eachother').on('connection', function(socket){
 				socket.on('ping', function(data, fn){
@@ -51,14 +51,14 @@ var prxySrv = new forwardProxy({
 					if (fn) fn({data: 'pong '+data.data});
 				});	
 			});
-			
+
 			// launching chrome browser with pac settings
 			var cli = app.params['chromiumPath'];
 			cli  = '"' + cli + '"';
 			cli += ' --proxy-pac-url="http://localhost:51686/auto.pac"';
 			cli += ' --user-data-dir="' + __dirname + '/user-data/' + '"';
 			cli += ' --disable-translate';
-			
+
 			console.log("cli: "+cli);
 			child = exec(cli);
 			child.on('exit', function(code){
