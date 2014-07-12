@@ -1,0 +1,16 @@
+{
+    "name": "video-share",
+    "author": "iwebpp@gmail.com",
+    "description": "Share videos among peers.",
+    "licence": "MIT",
+    "width": "1024",
+    "height": "768",
+    "frontend": "chromium",
+    "backend": "node",
+    "htdocs": "htdocs",
+    "defaultLocation": "index.html",
+    "main": "app.js",
+    "version": "0.1",
+    "v": "0.1",
+    "exitOnAppWinClose": true
+}
