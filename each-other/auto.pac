@@ -1145,58 +1145,62 @@ var RULES = [
 
 function FindProxyForURL(url, host) {
 
-    function isDomain(domain) {
-        var host_length, domain_length;
-        return ((domain[0] === '.') ? (host === domain.slice(1) || ((host_length = host.length) >= (domain_length = domain.length) && host.slice(host_length - domain_length) === domain)) : (host === domain));
-    } 
+	function isDomain(domain) {
+		var host_length, domain_length;
+		return ((domain[0] === '.') ? 
+				(host === domain.slice(1) || 
+				((host_length = host.length) >= 
+				(domain_length = domain.length) && 
+				 host.slice(host_length - domain_length) === domain)) : 
+				(host === domain));
+	} 
 
-    function rule_filter(callback) {
-        // IMPORTANT: Respect the order of RULES.
-        for (var j = 0; j < RULES.length; j++) {
-            var rules=RULES[j]
-            for (var i = 0; i < rules.length; i++) {
-               if (callback(rules[i]) === true) {
-                   return true;
-               }
-            } 
-        } 
-        return false;
-    }
+	function rule_filter(callback) {
+		// IMPORTANT: Respect the order of RULES.
+		for (var j = 0; j < RULES.length; j++) {
+			var rules=RULES[j]
+			for (var i = 0; i < rules.length; i++) {
+				if (callback(rules[i]) === true) {
+					return true;
+				}
+			} 
+		} 
+		return false;
+	}
 
-    // skip china sites
-    if (rule_filter(isDomain)) {
-        return "DIRECT";
-    } else {
-            // if none of above cases, it is always safe to use the proxy
-            ///return PROXY_METHOD;
-            
-            
-	// URLs within this network are accessed through
-	// port 8080 on fastproxy.example.com:
-	//if (isInNet(host, "10.0.0.0", "255.255.248.0"))
-	//{
-	//	return "PROXY fastproxy.example.com:8080";
-	//}
- 
-	// All other requests go through port 8080 of proxy.example.com.
-	// should that fail to respond, go directly to the WWW:
-	///return "PROXY localhost:51866;SOCKS localhost:51888;DIRECT";
-	
-	// ftp site prefer socks5 proxy
-	/*if (url.match("ftp:")) {
-		return "SOCKS5 127.0.0.1:51888";
-	}*/
-		
-	// http site prefer socks5 proxy
-	if (url.match("http:")) {
-        return "PROXY 127.0.0.1:proxy_port;";
+	// skip china sites
+	if (rule_filter(isDomain)) {
+		return "DIRECT";
+	} else {
+		// if none of above cases, it is always safe to use the proxy
+		///return PROXY_METHOD;
+
+		// URLs within this network are accessed through
+		// port 8080 on fastproxy.example.com:
+		//if (isInNet(host, "10.0.0.0", "255.255.248.0"))
+		//{
+		//	return "PROXY fastproxy.example.com:8080";
+		//}
+
+		// All other requests go through port 8080 of proxy.example.com.
+		// should that fail to respond, go directly to the WWW:
+		///return "PROXY localhost:51866;SOCKS localhost:51888;DIRECT";
+
+		// ftp site prefer socks5 proxy
+		if (url.match("ftp:")) {
+			return "SOCKS5 127.0.0.1:socks_port";
+		}
+
+		// http site prefer socks5 proxy
+		if (url.match("http:")) {
+			return "SOCKS5 127.0.0.1:socks_port;PROXY 127.0.0.1:proxy_port;";
+		}
+
+		// https site prefer http proxy
+		if (url.match("https:")) {
+			return "PROXY 127.0.0.1:proxy_port;SOCKS5 127.0.0.1:socks_port;";
+		}
+
 	}
-	
-	// https site prefer http proxy
-	if (url.match("https:")) {
-		return "PROXY 127.0.0.1:proxy_port;";
-	}
-    
-  }
 
 }
