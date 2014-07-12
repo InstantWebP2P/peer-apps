@@ -7,9 +7,12 @@ var socks = require('socks5');
 
 var forwardProxy = require('forward-proxy');
 var prxySrv = new forwardProxy({
-	    usrkey: 'TBD', 
-		secmode: 'acl', 
-		access_local: false
+	   endpoints: [{ip: 'iwebvpn.com', port: 51686}, {ip: 'iwebvpn.com', port: 51868}],
+            turn: [{ip: 'iwebvpn.com', agent: 51866, proxy: 51688}],
+            
+	      usrkey: 'TBD', 
+		 secmode: 'acl', 
+    access_local: false
 }, function(err, proxy){
 	if (err || !proxy) {
 		console.log(err+',create proxy failed');
