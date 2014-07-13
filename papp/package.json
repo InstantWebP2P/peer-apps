@@ -1,0 +1,24 @@
+{
+  "author": "Tom Zhou (http://iwebpp.com)",
+  "name": "papp",
+  "description": "Run Network Apps using HTML5/CSS/JS and Node.js/iWebPP.io",
+  "version": "0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/InstantWebP2P/peer-apps.git"
+  },
+  "keywords": [
+    "peer",
+    "webp2p",
+    "httpp",
+    "http",
+    "app"
+  ],
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "iwebpp.io": "latest"
+  }
+}
