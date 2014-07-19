@@ -7,7 +7,7 @@ var socks = require('socks5');
 
 var forwardProxy = require('forward-proxy');
 var prxySrv = new forwardProxy({
-	   endpoints: [{ip: 'iwebvpn.com', port: 51686}, {ip: 'iwebvpn.com', port: 51868}],
+       endpoints: [{ip: 'iwebvpn.com', port: 51686}, {ip: 'iwebvpn.com', port: 51868}],
             turn: [{ip: 'iwebvpn.com', agent: 51866, proxy: 51688}],
             
 	      usrkey: 'TBD', 
@@ -36,7 +36,7 @@ var prxySrv = new forwardProxy({
 		pxySrv.on('request', importApp.httpApp.proxy);
 		pxySrv.on('connect', importApp.httpApp.tunnel);
 
-		pxySrv.listen(prxydata.port, 50);
+		pxySrv.listen(prxydata.port);
 		console.log('Http forwar proxy server listen on port '+prxydata.port);
 
 		deskShell
@@ -46,7 +46,7 @@ var prxySrv = new forwardProxy({
 			// start socks proxy service
 			var sockspxySrv = socks.createServer(importApp.socksApp);
 
-			sockspxySrv.listen(socksdata.port, 50);
+			sockspxySrv.listen(socksdata.port);
 
 			sockspxySrv.on('error', function (e) {
 				console.error('SERVER ERROR: %j', e);
