@@ -1140,6 +1140,10 @@ var RULES = [
         ".sttlbb.com",
         ".mangocity.com",
         ".fantong.com"
+    ],
+    /// known external website
+    [
+        ".codepen.io"
     ]
 ];
 
